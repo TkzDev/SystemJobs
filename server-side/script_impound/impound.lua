@@ -57,7 +57,7 @@ AddEventHandler("police:impound",function(entity)
 	local pedId = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(pedId)
 	if pedId and vRP.getHealth(source) > 101 then
-		if vRP.hasPermission(pedId,"policia.permissao") then
+		if Permission(pedId,"policia.permissao") then
 			local ped = GetPlayerPed(source)
 			local coords = GetEntityCoords(ped)
 			local res = vRP.prompt(source, "Motivo do registro", "")
@@ -81,7 +81,7 @@ AddEventHandler("police:runPlate",function(entity)
 	local pedId = vRP.getUserId(source)
 	if pedId and vRP.getHealth(source) > 101 then
 		local TblImpound = Config['IMPOUND']['POLICEPERMISSION']
-		if vRP.hasPermission(pedId,TblImpound) then
+		if Permission(pedId,TblImpound) then
 			runPlate(source,entity[1])
 		end
 	end
@@ -94,7 +94,7 @@ AddEventHandler("police:runArrest",function(entity)
 	local identity = vRP.getUserIdentity(pedId)
 	local TblImpound = Config['IMPOUND']
 	if pedId and vRP.getHealth(source) > 101 then
-		if vRP.hasPermission(pedId,TblImpound['POLICEPERMISSION']) then
+		if Permission(pedId,TblImpound['POLICEPERMISSION']) then
 			local res = vRP.prompt(source, "Motivo da detenção", "")
 			if (not res or res == "") then emitNet("Notify", source, "vermelho", "Motivo de detenção inválido") return end
 			if vRP.request(source,"Enviar o veículo para detenção com motivo <b>"..res.."</b>?",30) then
@@ -121,7 +121,7 @@ RegisterCommand("placa",function(source,args,rawCommand)
 	local pedId = vRP.getUserId(source)
 	local TblImpound = Config['IMPOUND']['POLICEPERMISSION']
 	if pedId then
-		if vRP.hasPermission(pedId,TblImpound) and args[1] then
+		if Permission(pedId,TblImpound) and args[1] then
 			runPlate(source,args[1])
 		end
 	end

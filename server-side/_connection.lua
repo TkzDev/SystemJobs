@@ -9,7 +9,7 @@ Garages = Tunnel.getInterface("vrp_garages")
 emitNet = TriggerClientEvent
 emit = TriggerEvent
 emitItem = emitItem
-Permission = vRP.hasPermission
+Permission = Permission
 
 
 --- [ TUNNEL GET INTERFACE CLIENT ] ---
